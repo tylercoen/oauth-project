@@ -18,20 +18,23 @@ const app = express();
  */
 
 const PORT = 3000;
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-console.log("Client ID:", GITHUB_CLIENT_ID);
-console.log("Client secret:", GITHUB_CLIENT_SECRET);
+const CLIENT_ID = process.env.OAUTH_CLIENT_ID;
+const CLIENT_SECRET = process.env.OAUTH_CLIENT_SECRET;
+const CALLBACK_URL = process.env.OAUTH_CALLBACK_URL;
+
+console.log("Client ID:", CLIENT_ID);
+console.log("Client Secret:", CLIENT_SECRET);
+console.log("Callback URL:", CALLBACK_URL);
+
 /*
  * Passport Configurations
  */
 passport.use(
   new GitHubStrategy(
     {
-      clientID: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL:
-        "https://fuzzy-memory-vq6g9pqvr9r2wg6w-3000.app.github.dev/auth/github/callback",
+      clientID: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      callbackURL: CALLBACK_URL,
     },
     function (accessToken, refreshToken, profile, done) {
       return done(null, profile);
