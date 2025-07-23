@@ -28,9 +28,10 @@ const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 passport.use(
   new GitHubStrategy(
     {
-      clientId: GITHUB_CLIENT_ID,
+      clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/github/callback",
+      callbackURL:
+        "https://fuzzy-memory-vq6g9pqvr9r2wg6w-3000.app.github.dev/auth/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       return done(null, profile);
@@ -71,6 +72,16 @@ app.get("/", (req, res) => {
   res.render("index", { user: req.user });
 });
 
+/*
+ * ensureAuthenticated Callback Function
+ */
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+};
+
 app.get("/account", ensureAuthenticated, (req, res) => {
   res.render("account", { user: req.user });
 });
@@ -98,13 +109,3 @@ app.get(
  */
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-/*
- * ensureAuthenticated Callback Function
- */
-const ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-};
