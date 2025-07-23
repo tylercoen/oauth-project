@@ -20,11 +20,7 @@ const app = express();
 const PORT = 3000;
 const CLIENT_ID = process.env.OAUTH_CLIENT_ID;
 const CLIENT_SECRET = process.env.OAUTH_CLIENT_SECRET;
-const CALLBACK_URL = process.env.OAUTH_CALLBACK_URL;
-
-console.log("Client ID:", CLIENT_ID);
-console.log("Client Secret:", CLIENT_SECRET);
-console.log("Callback URL:", CALLBACK_URL);
+//const CALLBACK_URL = process.env.OAUTH_CALLBACK_URL;
 
 /*
  * Passport Configurations
@@ -34,7 +30,8 @@ passport.use(
     {
       clientID: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
-      callbackURL: CALLBACK_URL,
+      callbackURL:
+        "https://fuzzy-memory-vq6g9pqvr9r2wg6w-3000.app.github.dev/auth/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       return done(null, profile);
