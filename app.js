@@ -3,7 +3,6 @@
  */
 
 const path = require("path");
-require("dotenv").config();
 const express = require("express");
 const partials = require("express-partials");
 const session = require("express-session");
@@ -21,7 +20,8 @@ const app = express();
 const PORT = 3000;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-
+console.log("Client ID:", GITHUB_CLIENT_ID);
+console.log("Client secret:", GITHUB_CLIENT_SECRET);
 /*
  * Passport Configurations
  */
