@@ -101,8 +101,10 @@ app.get(
   "/auth/github/callback",
   passport.authenticate("github", {
     failureRedirect: "/login",
-    successRedirect: "/",
-  })
+  }),
+  function (req, res) {
+    res.redirect("/");
+  }
 );
 /*
  * Listener
